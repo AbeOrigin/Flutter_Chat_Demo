@@ -1,4 +1,6 @@
 import 'package:chat_demo/widgets/category_selector.dart';
+import 'package:chat_demo/widgets/favorite_contacts.dart';
+import 'package:chat_demo/widgets/recent_chats.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -55,9 +57,8 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               child: Column(
                 children: <Widget>[
-                  Row(
-                    children: <Widget>[],
-                  )
+                  FavoriteContacts(),
+                  RecentChats(),
                 ],
               ),
             ),

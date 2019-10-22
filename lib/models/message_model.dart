@@ -51,7 +51,7 @@ final User bruno =
     User(id: 9, name: 'Bruno Balduccio', imageUrl: 'assets/images/bruno.jpg');
 
 final User manuel =
-    User(id: 10, name: 'Manuel Domingo', imageUrl: 'assets/images/manuel.jpg');
+    User(id: 10, name: 'Manuel Domingo', imageUrl: 'assets/images/manu.jpg');
 
 final User dany =
     User(id: 12, name: 'Daniel Sosa', imageUrl: 'assets/images/dany.png');
@@ -116,6 +116,20 @@ List<Message> chats = [
   ),
   Message(
     sender: flo,
+    time: '11:30 AM',
+    text: 'Hey, how\'s it going? What did you do today?',
+    isLiked: false,
+    unRead: false,
+  ),
+  Message(
+    sender: florTwo,
+    time: '12:30 PM',
+    text: 'Hey, how\'s it going? What did you do today?',
+    isLiked: false,
+    unRead: false,
+  ),
+  Message(
+    sender: pela,
     time: '11:30 AM',
     text: 'Hey, how\'s it going? What did you do today?',
     isLiked: false,
