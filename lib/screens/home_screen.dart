@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Row(
           children: <Widget>[
             Text(
-              'Chats',
+              'SpaceTalk',
               style: TextStyle(
                 fontSize: 28.0,
                 fontWeight: FontWeight.bold,

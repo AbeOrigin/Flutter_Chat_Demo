@@ -1,4 +1,5 @@
 import 'package:chat_demo/models/message_model.dart';
+import 'package:chat_demo/screens/chat_screen_screen.dart';
 import 'package:flutter/material.dart';
 
 class FavoriteContacts extends StatelessWidget {
@@ -42,28 +43,46 @@ class FavoriteContacts extends StatelessWidget {
               padding: EdgeInsets.only(left: 10),
               itemCount: favUsers.length,
               itemBuilder: (BuildContext context, int index) {
-                return Padding(
-                  padding: EdgeInsets.all(10.0),
-                  child: Column(
-                    children: <Widget>[
-                      CircleAvatar(
-                        radius: 35.0,
-                        backgroundImage: AssetImage(
-                          favUsers[index].imageUrl,
+                return GestureDetector(
+                  onTap: () {
+                    chats.forEach((chat) {
+                      print(chat);
+                      if (chat.sender.id == favUsers[index].id) {
+                        chat.unRead = false;
+                      }
+                    });
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => ChatScreen(
+                          user: favUsers[index],
                         ),
                       ),
-                      SizedBox(
-                        height: 6.0,
-                      ),
-                      Text(
-                        favUsers[index].name,
-                        style: TextStyle(
-                          color: Colors.blueGrey,
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w600,
+                    );
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: Column(
+                      children: <Widget>[
+                        CircleAvatar(
+                          radius: 35.0,
+                          backgroundImage: AssetImage(
+                            favUsers[index].imageUrl,
+                          ),
                         ),
-                      ),
-                    ],
+                        SizedBox(
+                          height: 6.0,
+                        ),
+                        Text(
+                          favUsers[index].name,
+                          style: TextStyle(
+                            color: Colors.blueGrey,
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 );
               },

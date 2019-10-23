@@ -1,11 +1,11 @@
 import 'package:chat_demo/models/user_mode.dart';
 
 class Message {
-  final User sender;
-  final String time;
-  final String text;
-  final bool isLiked;
-  final bool unRead;
+  User sender;
+  String time;
+  String text;
+  bool isLiked;
+  bool unRead;
 
   Message({
     this.sender,
@@ -14,6 +14,10 @@ class Message {
     this.isLiked,
     this.unRead,
   });
+
+  // set unReadStatus(bool nextValue) {
+  //   this.unRead = nextValue;
+  // }
 }
 
 // Me
