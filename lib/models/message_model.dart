@@ -22,43 +22,43 @@ class Message {
 
 // Me
 final User currentUser =
-    User(id: 0, name: 'Abraham Kazerian', imageUrl: 'assets/images/me.jpg');
+    User(id: 0, name: 'Abraham Kazerian', imageUrl: 'assets/images/me.jpg', isOnline: true);
 
 final User ilan =
-    User(id: 1, name: 'Ilan Garcia', imageUrl: 'assets/images/ilan.jpg');
+    User(id: 1, name: 'Ilan Garcia', imageUrl: 'assets/images/ilan.jpg', isOnline: true);
 
 final User juan =
-    User(id: 2, name: 'Juan Vico', imageUrl: 'assets/images/vico.jpg');
+    User(id: 2, name: 'Juan Vico', imageUrl: 'assets/images/vico.jpg', isOnline: false);
 
 final User pela =
-    User(id: 3, name: 'Juan Manuel Sobral', imageUrl: 'assets/images/pela.png');
+    User(id: 3, name: 'Juan Manuel Sobral', imageUrl: 'assets/images/pela.png', isOnline: true);
 
 final User fede =
-    User(id: 4, name: 'Federico Sendra', imageUrl: 'assets/images/fede.png');
+    User(id: 4, name: 'Federico Sendra', imageUrl: 'assets/images/fede.png', isOnline: false);
 
 final User flo =
-    User(id: 5, name: 'Florencia Pereira', imageUrl: 'assets/images/flo.jpg');
+    User(id: 5, name: 'Florencia Pereira', imageUrl: 'assets/images/flo.jpg', isOnline: true);
 
 final User florTwo = User(
-    id: 11, name: 'Florencia Mosquera', imageUrl: 'assets/images/floTwo.png');
+    id: 11, name: 'Florencia Mosquera', imageUrl: 'assets/images/floTwo.png', isOnline: false);
 
 final User jesus =
-    User(id: 6, name: 'Jesus Aguiar', imageUrl: 'assets/images/jesus.jpg');
+    User(id: 6, name: 'Jesus Aguiar', imageUrl: 'assets/images/jesus.jpg', isOnline: true);
 
 final User edgar =
-    User(id: 7, name: 'Edgar Contreras', imageUrl: 'assets/images/edgar.jpg');
+    User(id: 7, name: 'Edgar Contreras', imageUrl: 'assets/images/edgar.jpg', isOnline: true);
 
 final User joel =
-    User(id: 8, name: 'Joel Suarez', imageUrl: 'assets/images/joel.jpg');
+    User(id: 8, name: 'Joel Suarez', imageUrl: 'assets/images/joel.jpg', isOnline: false);
 
 final User bruno =
-    User(id: 9, name: 'Bruno Balduccio', imageUrl: 'assets/images/bruno.jpg');
+    User(id: 9, name: 'Bruno Balduccio', imageUrl: 'assets/images/bruno.jpg', isOnline: false);
 
 final User manuel =
-    User(id: 10, name: 'Manuel Domingo', imageUrl: 'assets/images/manu.jpg');
+    User(id: 10, name: 'Manuel Domingo', imageUrl: 'assets/images/manu.jpg', isOnline: true);
 
 final User dany =
-    User(id: 12, name: 'Daniel Sosa', imageUrl: 'assets/images/dany.png');
+    User(id: 12, name: 'Daniel Sosa', imageUrl: 'assets/images/dany.png', isOnline: true);
 
 List<User> favUsers = [
   flo,

@@ -53,9 +53,13 @@ class RecentChats extends StatelessWidget {
                     children: <Widget>[
                       Row(
                         children: <Widget>[
-                          CircleAvatar(
-                            radius: 35.0,
-                            backgroundImage: AssetImage(chat.sender.imageUrl),
+                          Hero(
+                            tag: chat.sender.name,
+                            child: CircleAvatar(
+                              radius: 35.0,
+                              backgroundColor: Theme.of(context).accentColor,
+                              backgroundImage: AssetImage(chat.sender.imageUrl),
+                            ),
                           ),
                           SizedBox(
                             width: 10.0,

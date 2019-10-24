@@ -117,14 +117,51 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
+        centerTitle: true,
         title: Row(
           children: <Widget>[
-            Text(
-              widget.user.name,
-              style: TextStyle(
-                fontSize: 25.0,
-                fontWeight: FontWeight.w500,
+            Hero(
+              tag: widget.user.name,
+              child: CircleAvatar(
+                radius: 18.0,
+                backgroundColor: Colors.blueGrey,
+                backgroundImage: AssetImage(
+                  widget.user.imageUrl,
+                ),
               ),
+            ),
+            SizedBox(
+              width: 13.0,
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                SizedBox(
+                  height: 8.0,
+                ),
+                Text(
+                  widget.user.name,
+                  style: TextStyle(
+                    fontSize: 25.0,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                widget.user.isOnline
+                    ? Text(
+                        'Online',
+                        style: TextStyle(
+                          fontSize: 13.0,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      )
+                    : Text(
+                        'Offline',
+                        style: TextStyle(
+                          fontSize: 13.0,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+              ],
             ),
           ],
           mainAxisAlignment: MainAxisAlignment.center,

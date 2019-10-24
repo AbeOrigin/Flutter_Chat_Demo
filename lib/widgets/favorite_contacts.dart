@@ -66,6 +66,7 @@ class FavoriteContacts extends StatelessWidget {
                       children: <Widget>[
                         CircleAvatar(
                           radius: 35.0,
+                          backgroundColor: Theme.of(context).accentColor,
                           backgroundImage: AssetImage(
                             favUsers[index].imageUrl,
                           ),
