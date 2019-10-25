@@ -1,3 +1,5 @@
+import 'dart:ui' as prefix0;
+
 import 'package:chat_demo/models/user_mode.dart';
 import 'package:chat_demo/models/message_model.dart';
 import 'package:flutter/material.dart';
@@ -80,34 +82,56 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
+  // need to refactor code to make the chat part of the main component
   _buildMessageComposer() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 8.0),
-      height: 70.0,
-      color: Colors.white,
-      child: Row(
-        children: <Widget>[
-          IconButton(
-            icon: Icon(Icons.photo),
-            iconSize: 25.0,
-            color: Theme.of(context).primaryColor,
-            onPressed: () {},
-          ),
-          Expanded(
-            child: TextField(
-              textCapitalization: TextCapitalization.sentences,
-              onChanged: (value) {},
-              decoration:
-                  InputDecoration.collapsed(hintText: 'Send a Message...'),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border(
+          top: BorderSide(color: Colors.white, style: BorderStyle.solid),
+        ),
+      ),
+      child: Card(
+        elevation: 13.0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30.0),
+        ),
+        margin: EdgeInsets.only(right: 20.0, left: 20.0, bottom: 20.0),
+        color: Theme.of(context).accentColor,
+        child: Row(
+          children: <Widget>[
+            Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30.0),
+              ),
+              child: IconButton(
+                icon: Icon(Icons.photo),
+                iconSize: 25.0,
+                color: Theme.of(context).primaryColor,
+                onPressed: () {},
+              ),
             ),
-          ),
-          IconButton(
-            icon: Icon(Icons.send),
-            iconSize: 25.0,
-            color: Theme.of(context).primaryColor,
-            onPressed: () {},
-          )
-        ],
+            Expanded(
+              child: TextField(
+                textCapitalization: TextCapitalization.sentences,
+                onChanged: (value) {},
+                decoration:
+                    InputDecoration.collapsed(hintText: 'Send a Message...'),
+              ),
+            ),
+            Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30.0),
+              ),
+              child: IconButton(
+                icon: Icon(Icons.send),
+                iconSize: 25.0,
+                color: Theme.of(context).primaryColor,
+                onPressed: () {},
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -192,29 +216,30 @@ class _ChatScreenState extends State<ChatScreen> {
           children: <Widget>[
             Expanded(
               child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
-                    ),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
                   ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
-                    ),
-                    child: ListView.builder(
-                      reverse: true,
-                      padding: EdgeInsets.only(top: 15.0),
-                      itemCount: messages.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        final Message message = messages[index];
-                        final bool isMe = message.sender.id == currentUser.id;
-                        return _buildMessage(message, isMe);
-                      },
-                    ),
-                  )),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                  ),
+                  child: ListView.builder(
+                    reverse: true,
+                    padding: EdgeInsets.only(top: 15.0),
+                    itemCount: messages.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final Message message = messages[index];
+                      final bool isMe = message.sender.id == currentUser.id;
+                      return _buildMessage(message, isMe);
+                    },
+                  ),
+                ),
+              ),
             ),
             _buildMessageComposer(),
           ],
