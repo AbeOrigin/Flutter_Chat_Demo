@@ -124,6 +124,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 borderRadius: BorderRadius.circular(30.0),
               ),
               child: IconButton(
+                alignment: Alignment.centerRight,
                 icon: Icon(Icons.send),
                 iconSize: 25.0,
                 color: Theme.of(context).primaryColor,
