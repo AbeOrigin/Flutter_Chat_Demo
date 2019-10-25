@@ -114,57 +114,67 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
+    unMarkingNewInRecentChat();
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
-        centerTitle: true,
         title: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Hero(
-              tag: widget.user.name,
-              child: CircleAvatar(
-                radius: 18.0,
-                backgroundColor: Colors.blueGrey,
-                backgroundImage: AssetImage(
-                  widget.user.imageUrl,
-                ),
+            Container(
+              child: Row(
+                children: <Widget>[
+                  Hero(
+                    tag: widget.user.name,
+                    child: CircleAvatar(
+                      radius: 18.0,
+                      backgroundColor: Colors.blueGrey,
+                      backgroundImage: AssetImage(
+                        widget.user.imageUrl,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 8.0,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 8.0,
+                      ),
+                      Text(
+                        widget.user.name,
+                        style: TextStyle(
+                          fontSize: 25.0,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        textAlign: TextAlign.start,
+                      ),
+                      widget.user.isOnline
+                          ? Text(
+                              'Online',
+                              style: TextStyle(
+                                fontSize: 13.0,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              textAlign: TextAlign.start,
+                            )
+                          : Text(
+                              'Offline',
+                              style: TextStyle(
+                                fontSize: 13.0,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              textAlign: TextAlign.start,
+                            ),
+                    ],
+                  ),
+                ],
+                mainAxisAlignment: MainAxisAlignment.center,
               ),
             ),
-            SizedBox(
-              width: 13.0,
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                SizedBox(
-                  height: 8.0,
-                ),
-                Text(
-                  widget.user.name,
-                  style: TextStyle(
-                    fontSize: 25.0,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                widget.user.isOnline
-                    ? Text(
-                        'Online',
-                        style: TextStyle(
-                          fontSize: 13.0,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      )
-                    : Text(
-                        'Offline',
-                        style: TextStyle(
-                          fontSize: 13.0,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-              ],
-            ),
           ],
-          mainAxisAlignment: MainAxisAlignment.center,
         ),
         elevation: 0.0,
         actions: <Widget>[
@@ -211,5 +221,14 @@ class _ChatScreenState extends State<ChatScreen> {
         ),
       ),
     );
+  }
+
+  void unMarkingNewInRecentChat() {
+    chats.forEach((chat) {
+      print(chat);
+      if (chat.sender.id == widget.user.id) {
+        chat.unRead = false;
+      }
+    });
   }
 }

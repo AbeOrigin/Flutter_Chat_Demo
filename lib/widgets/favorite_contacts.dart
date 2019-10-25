@@ -45,12 +45,6 @@ class FavoriteContacts extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
                   onTap: () {
-                    chats.forEach((chat) {
-                      print(chat);
-                      if (chat.sender.id == favUsers[index].id) {
-                        chat.unRead = false;
-                      }
-                    });
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -66,7 +60,7 @@ class FavoriteContacts extends StatelessWidget {
                       children: <Widget>[
                         CircleAvatar(
                           radius: 35.0,
-                          backgroundColor: Theme.of(context).accentColor,
+                          backgroundColor: Colors.grey,
                           backgroundImage: AssetImage(
                             favUsers[index].imageUrl,
                           ),
