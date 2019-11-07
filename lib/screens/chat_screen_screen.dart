@@ -1,5 +1,3 @@
-import 'dart:ui' as prefix0;
-
 import 'package:chat_demo/models/user_mode.dart';
 import 'package:chat_demo/models/message_model.dart';
 import 'package:flutter/material.dart';
@@ -112,11 +110,16 @@ class _ChatScreenState extends State<ChatScreen> {
               ),
             ),
             Expanded(
+        
               child: TextField(
                 textCapitalization: TextCapitalization.sentences,
                 onChanged: (value) {},
                 decoration:
                     InputDecoration.collapsed(hintText: 'Send a Message...'),
+                    style: TextStyle(
+                      fontSize: 20,
+                      height: 2,
+                    ),
               ),
             ),
             Card(

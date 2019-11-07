@@ -15,31 +15,35 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          iconSize: 30.0,
-          color: Colors.white,
-          onPressed: () {},
-        ),
         title: Row(
           children: <Widget>[
-            Text(
-              'SpaceTalk',
-              style: TextStyle(
-                fontSize: 28.0,
-                fontWeight: FontWeight.bold,
-              ),
+            SizedBox(
+              width: 40,
+            ),
+            FadeInImage.assetNetwork(
+              width: 200,
+              height: 100,
+              alignment: Alignment.center,
+              fit: BoxFit.contain,
+              fadeInCurve: Curves.decelerate,
+              placeholder: 'assets/images/space.gif',
+              image: 'https://spacedev.uy/assets/img/space.png',
             ),
           ],
           mainAxisAlignment: MainAxisAlignment.center,
         ),
         elevation: 0.0,
         actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.account_circle),
-            iconSize: 30.0,
-            color: Colors.white,
-            onPressed: () {},
+          Expanded(
+            flex: 0,
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              child: CircleAvatar(
+                radius: 19.0,
+                backgroundColor: Theme.of(context).accentColor,
+                backgroundImage: AssetImage('assets/images/me.jpg'),
+              ),
+            ),
           ),
         ],
       ),
