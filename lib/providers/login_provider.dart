@@ -7,14 +7,18 @@ import 'package:http/http.dart' as http;
 import 'package:rxdart/rxdart.dart';
 
 import 'package:chat_demo/screens/login_screen.dart';
+import 'package:web_socket_channel/io.dart';
 
 class LoginProvider {
   final String onLastError = '';
 
   BehaviorSubject<UserPostLogin> _currentUser = BehaviorSubject();
   BehaviorSubject _login = BehaviorSubject.seeded(false);
+  BehaviorSubject _messageListChat = new BehaviorSubject();
+  var channel;
 
   Observable get stream$ => _login.stream;
+  Observable<UserPostLogin> get currentUser$ => _currentUser;
 
   Future<UserPostLogin> logintoMatterMost(
       String userEmail, String password, context) async {
@@ -30,12 +34,20 @@ class LoginProvider {
         headers: {'content-type': 'application/json'});
     if (response.statusCode == 200) {
       final jsonFormated = UserPostLogin.fromJson(json.decode(response.body));
+      var headerToken = parseHeaders(response.headers);
+      channel =
+          IOWebSocketChannel.connect('wss://chat.spacedev.uy/api/v4/websocket', headers:{"token": headerToken['token']} );
+      channel.sink.add({
+        "seq": 1,
+        "action": "authentication_challenge",
+        "data": {"token": headerToken['token']}
+      });
+      channel.stream.listen((data) => print(data));
       _currentUser.add(jsonFormated);
       Navigator.pushReplacementNamed(context, '/homeScreen');
       return jsonFormated;
     } else {
       final errorDialog = ErrorLogin();
-
       showDialog(
         context: context,
         builder: (_) => errorDialog,
@@ -43,6 +55,10 @@ class LoginProvider {
       );
     }
   }
+}
+
+parseHeaders(Map<String, dynamic> json) {
+  return ({'token': json['token']});
 }
 
 class BodyOfLogin {
