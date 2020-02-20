@@ -1,4 +1,4 @@
-import 'package:chat_demo/models/user_mode.dart';
+import 'package:chat_demo/models/user.dart';
 import 'package:chat_demo/models/message_model.dart';
 import 'package:flutter/material.dart';
 
@@ -142,7 +142,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    unMarkingNewInRecentChat();
+    // unMarkingNewInRecentChat();
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
@@ -153,12 +153,12 @@ class _ChatScreenState extends State<ChatScreen> {
               child: Row(
                 children: <Widget>[
                   Hero(
-                    tag: widget.user.name,
+                    tag: widget.user.nickname,
                     child: CircleAvatar(
                       radius: 18.0,
                       backgroundColor: Colors.blueGrey,
                       backgroundImage: AssetImage(
-                        widget.user.imageUrl,
+                        'https://scontent.fmvd3-1.fna.fbcdn.net/v/t1.0-9/s960x960/50811794_1241966839285152_5832961223175438336_o.jpg?_nc_cat=109&_nc_ohc=Sm8DWiW3mJAAX_WJ4LC&_nc_ht=scontent.fmvd3-1.fna&_nc_tp=7&oh=c61e4addf2fac208300c50a39d7a05fb&oe=5F021982',
                       ),
                     ),
                   ),
@@ -172,14 +172,14 @@ class _ChatScreenState extends State<ChatScreen> {
                         height: 8.0,
                       ),
                       Text(
-                        widget.user.name,
+                        widget.user.nickname,
                         style: TextStyle(
                           fontSize: 25.0,
                           fontWeight: FontWeight.w500,
                         ),
                         textAlign: TextAlign.start,
                       ),
-                      widget.user.isOnline
+                      false
                           ? Text(
                               'Online',
                               style: TextStyle(
@@ -232,16 +232,16 @@ class _ChatScreenState extends State<ChatScreen> {
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20),
                   ),
-                  child: ListView.builder(
-                    reverse: true,
-                    padding: EdgeInsets.only(top: 15.0),
-                    itemCount: messages.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final Message message = messages[index];
-                      final bool isMe = message.sender.id == currentUser.id;
-                      return _buildMessage(message, isMe);
-                    },
-                  ),
+                  // child: ListView.builder(
+                  //   reverse: true,
+                  //   padding: EdgeInsets.only(top: 15.0),
+                  //   itemCount: 15,
+                  //   itemBuilder: (BuildContext context, int index) {
+                  //     final Message message = messages[index];
+                  //     final bool isMe = message.sender.id == currentUser.id;
+                  //     return _buildMessage(message, isMe);
+                  //   },
+                  // ),
                 ),
               ),
             ),
@@ -252,12 +252,12 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
-  void unMarkingNewInRecentChat() {
-    chats.forEach((chat) {
-      print(chat);
-      if (chat.sender.id == widget.user.id) {
-        chat.unRead = false;
-      }
-    });
-  }
+  // void unMarkingNewInRecentChat() {
+  //   chats.forEach((chat) {
+  //     print(chat);
+  //     if (chat.sender.id == widget.user.id) {
+  //       chat.unRead = false;
+  //     }
+  //   });
+  // }
 }
