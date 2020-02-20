@@ -60,7 +60,7 @@ class UserBloc {
     if (dataFromAuth != null) {
       switch (dataFromAuth.event) {
         case 'hello':
-          redirectTo('homeScreen');
+          redirectToHome('homeScreen');
           break;
         default:
       }
@@ -69,6 +69,10 @@ class UserBloc {
 
   void redirectTo(String redirectUrl) {
     locator<NavigationService>().navigateTo(redirectUrl);
+  }
+
+  void redirectToHome(String redirectUrl) {
+    locator<NavigationService>().navigateToWithPop(redirectUrl);
   }
 
   void userLogOut() {

@@ -11,4 +11,9 @@ class NavigationService {
     log('Redirected to $navigateTo');
     return navigatorKey.currentState.pushNamed(navigateTo);
   }
+
+  Future<dynamic> navigateToWithPop(String navigateTo){
+    log('Redirected with pop to $navigateTo');
+    return navigatorKey.currentState.pushReplacementNamed(navigateTo);
+  }
 }
