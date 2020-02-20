@@ -38,6 +38,10 @@ class User {
   }
 
   Map<String, String> getNecessaryHeaders() {
-    return {'If-None-Match': this.pictureDate.toString()};
+    return {
+      'Sec-Fetch-Dest': 'image',
+      'DNT': '1',
+      'Content-Type': 'application/json'
+    };
   }
 }

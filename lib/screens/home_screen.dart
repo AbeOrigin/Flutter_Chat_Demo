@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:chat_demo/models/user.dart';
 import 'package:chat_demo/providers/userBloc.dart';
 import 'package:chat_demo/widgets/category_selector.dart';
@@ -18,6 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: HeaderRow(),
         elevation: 0.0,
         actions: <Widget>[
@@ -51,11 +54,9 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class UserIconHome extends StatelessWidget {
-  User currentLogedInUser;
+   final User currentLogedInUser;
 
-  UserIconHome(User currentLogedInUser) {
-    this.currentLogedInUser = currentLogedInUser;
-  }
+  UserIconHome(this.currentLogedInUser);
 
   @override
   Widget build(BuildContext context) {
@@ -66,8 +67,10 @@ class UserIconHome extends StatelessWidget {
         child: CircleAvatar(
           radius: 19.0,
           backgroundColor: Theme.of(context).accentColor,
-          backgroundImage:
-              NetworkImage(this.currentLogedInUser?.getUserImageUrl(), headers: this.currentLogedInUser?.getNecessaryHeaders()),
+          backgroundImage: NetworkImage(
+            this.currentLogedInUser?.getUserImageUrl(),
+            headers: this.currentLogedInUser?.getNecessaryHeaders(),
+          ),
         ),
       ),
     );
