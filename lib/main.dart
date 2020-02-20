@@ -1,17 +1,14 @@
-import 'package:chat_demo/providers/login_provider.dart';
+import 'package:chat_demo/navigation/navigationService.dart';
 import 'package:chat_demo/screens/home_screen.dart';
 import 'package:chat_demo/screens/login_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_stetho/flutter_stetho.dart';
 import 'package:get_it/get_it.dart';
 
-
-GetIt getIt = GetIt.I;
-var baseURL ='https://chat.spacedev.uy/api/v4/';
+String baseURL = 'https://chat.spacedev.uy/api/v4/';
+GetIt locator = GetIt.I;
 
 void main() {
-  Stetho.initialize();
-  getIt.registerSingleton<LoginProvider>(LoginProvider());
+  setupLocator();
   runApp(MyApp());
 }
 
@@ -20,16 +17,29 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Better looking than Mattermost',
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: true,
       theme: ThemeData(
         primaryColor: Colors.red,
         accentColor: Color(0xFFFEF9EB),
       ),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => LoginScreen(),
-        '/homeScreen': (context) => HomeScreen(),
+      navigatorKey: locator<NavigationService>().navigatorKey,
+      onGenerateRoute: (RouteSettings settings) {
+        switch (settings.name) {
+          case 'homeScreen':
+            return MaterialPageRoute(builder: (context) => HomeScreen());
+            break;
+          case 'login':
+            return MaterialPageRoute(builder: (context) => LoginScreen());
+            break;
+          default:
+            return MaterialPageRoute(builder: (context) => LoginScreen());
+        }
       },
+      home: LoginScreen(),
     );
   }
+}
+
+void setupLocator() {
+  locator.registerLazySingleton(() => NavigationService());
 }

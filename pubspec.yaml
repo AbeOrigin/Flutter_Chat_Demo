@@ -18,9 +18,7 @@ environment:
 
 dependencies:
   get_it: 3.0.3
-  rxdart:
   http:
-  flutter_stetho:
   web_socket_channel: 1.1.0
   flutter:
     sdk: flutter

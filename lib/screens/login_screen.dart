@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:chat_demo/providers/login_provider.dart';
+import 'package:chat_demo/providers/userBloc.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -110,130 +110,124 @@ class _FormButtonContainerState extends State<FormButtonContainer> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-      stream: LoginProvider().stream$,
-      builder: (BuildContext context, AsyncSnapshot snap) {
-        return Column(
+    return Column(
+      children: <Widget>[
+        Column(
           children: <Widget>[
+            Container(
+              height: 40,
+              margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              decoration: BoxDecoration(),
+              child: TextField(
+                controller: email,
+                style: TextStyle(
+                  height: 3,
+                ),
+                decoration: InputDecoration(
+                  hasFloatingPlaceholder: true,
+                  alignLabelWithHint: true,
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 10,
+                  ),
+                  hintText: 'Email....',
+                ),
+              ),
+            ),
+            Container(
+              height: 40,
+              margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              decoration: BoxDecoration(),
+              child: TextField(
+                controller: password,
+                obscureText: true,
+                style: TextStyle(
+                  height: 3,
+                ),
+                decoration: InputDecoration(
+                  hasFloatingPlaceholder: true,
+                  alignLabelWithHint: true,
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 10,
+                  ),
+                  hintText: 'Password....',
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 30,
+            ),
             Column(
               children: <Widget>[
                 Container(
-                  height: 40,
-                  margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                  decoration: BoxDecoration(),
-                  child: TextField(
-                    controller: email,
-                    style: TextStyle(
-                      height: 3,
-                    ),
-                    decoration: InputDecoration(
-                      hasFloatingPlaceholder: true,
-                      alignLabelWithHint: true,
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 10,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).primaryColor,
+                  ),
+                  child: FlatButton(
+                    onPressed: () async {
+                      try {
+                        UserBloc().logintoMatterMost(
+                            email.text, password.text);
+                      } catch (e) {
+                        print(e);
+                      }
+                    },
+                    child: Container(
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            'Log In',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
                       ),
-                      hintText: 'Email....',
                     ),
                   ),
                 ),
                 Container(
-                  height: 40,
-                  margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                  decoration: BoxDecoration(),
-                  child: TextField(
-                    controller: password,
-                    obscureText: true,
-                    style: TextStyle(
-                      height: 3,
-                    ),
-                    decoration: InputDecoration(
-                      hasFloatingPlaceholder: true,
-                      alignLabelWithHint: true,
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 10,
+                  margin: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).primaryColor,
+                  ),
+                  child: FlatButton(
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(
+                        context,
+                        '/homeScreen',
+                      );
+                    },
+                    child: Container(
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            'Recover Account',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
                       ),
-                      hintText: 'Password....',
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Column(
-                  children: <Widget>[
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColor,
-                      ),
-                      child: FlatButton(
-                        onPressed: () async {
-                          try {
-                            LoginProvider().logintoMatterMost(
-                                email.text, password.text, context);
-                          } catch (e) {
-                            
-                          }
-                        },
-                        child: Container(
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text(
-                                'Log In',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin:
-                          EdgeInsets.symmetric(vertical: 30, horizontal: 20),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColor,
-                      ),
-                      child: FlatButton(
-                        onPressed: () {
-                          Navigator.pushReplacementNamed(
-                            context,
-                            '/homeScreen',
-                          );
-                        },
-                        child: Container(
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text(
-                                'Recover Account',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
                 ),
               ],
             ),
           ],
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-        );
-      },
+        ),
+      ],
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
     );
   }
 }
@@ -259,8 +253,7 @@ class ErrorLogin extends StatelessWidget {
         RaisedButton(
           color: Colors.white,
           onPressed: () {
-            Navigator.of(context, rootNavigator: true)
-                .pop('dialog');
+            Navigator.of(context, rootNavigator: true).pop('dialog');
           },
           child: Text(
             'Ok',
