@@ -11,8 +11,14 @@ class UserBloc {
   final String onLastError = '';
   static final UserBloc _singleton = UserBloc._internal();
   final WsHandler handler = WsHandler();
+
+  // Subscription For events
   StreamSubscription<dynamic> subscriptionToAuth;
+  StreamSubscription<dynamic> subscriptionOfUsers;
+
+  // Data To Hold
   User _currentLogedInUser;
+  String headerForAllRequest;
 
   factory UserBloc() {
     return _singleton;
@@ -27,13 +33,15 @@ class UserBloc {
       password: password.toString(),
       token: '',
     );
-    final response = await http.post(
+    var client = http.Client();
+    final response = await client.post(
         Uri.encodeFull('https://chat.spacedev.uy/api/v4/users/login'),
         body: json.encode(loginBody.toJson()),
         headers: {'content-type': 'application/json'});
     if (response.statusCode == 200) {
       this._currentLogedInUser = User.fromJson(json.decode(response.body));
       var headerToken = parseHeaders(response.headers);
+      // saveCookiesFromResponseOfLogin(response);
       this.handler.connectToWebSocket('wss://chat.spacedev.uy/api/v4/websocket',
           {"token": headerToken['token']});
       this.handler.sendToWebSocket({
@@ -54,6 +62,11 @@ class UserBloc {
       userLogOut();
     }
     return this._currentLogedInUser;
+  }
+
+  void saveCookiesFromResponseOfLogin(Map<String, String> response){
+    // Map<String, dynamic> importantHeaders = { 'Set-Cookie': response['Set-Cookie']};
+    // response;
   }
 
   void handleAuthEvents(MattermostResponse dataFromAuth) {
